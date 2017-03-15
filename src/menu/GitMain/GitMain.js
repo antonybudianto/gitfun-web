@@ -55,8 +55,6 @@ class GitMain extends Component {
     return (
       <div className="GitMain row">
         <div className="GitMain-header col-md-12">
-          <h2>GitFun</h2>
-          <br/>
           <div className="col-md-4 col-md-offset-4">
             <form onSubmit={this.handleSubmit.bind(this)} noValidate>
             <div className="input-group">
