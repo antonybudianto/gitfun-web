@@ -1,0 +1,34 @@
+.GitMain {
+  text-align: center;
+}
+
+.GitMain-logo {
+  animation: GitMain-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.GitMain-header {
+  background-color: black;
+  padding: 20px;
+  color: white;
+}
+
+.GitMain-intro {
+  padding-top: 50px;
+  font-size: large;
+}
+
+.GitMain-footer {
+  margin-top: 30px;
+  padding: 10px;
+  color: gray;
+}
+
+.thumbnail {
+  margin: 0;
+}
+
+@keyframes GitMain-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
