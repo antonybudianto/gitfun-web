@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import './GitMain.css';
 
 import GitProfileCard from '../../common/GitProfileCard';
@@ -11,7 +12,8 @@ class GitMain extends Component {
     this.state = {
       value: '',
       loading: false,
-      users: []
+      users: [],
+      redirectTo: null
     };
   }
 
@@ -51,7 +53,20 @@ class GitMain extends Component {
     });
   }
 
+  navigateToProfile(data) {
+    console.log(data);
+    const { login } = data;
+    this.setState({
+      redirectTo: `/profile/${login}`
+    });
+  }
+
   render() {
+    if (this.state.redirectTo) {
+      return (
+        <Redirect to={this.state.redirectTo} />
+      );
+    }
     return (
       <div className="GitMain row">
         <div className="GitMain-header col-md-12">
@@ -79,7 +94,7 @@ class GitMain extends Component {
                 }
                 {
                   this.state.users.map(user =>
-                    <GitProfileCard onClick={() => alert('a')} key={user.id} user={user}></GitProfileCard>
+                    <GitProfileCard onClick={this.navigateToProfile.bind(this)} key={user.id} user={user}></GitProfileCard>
                   )
                 }
               </div>
