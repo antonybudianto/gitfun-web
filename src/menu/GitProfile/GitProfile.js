@@ -35,7 +35,7 @@ export default class GitProfile extends React.Component {
   render() {
     if (this.state.loading) {
       return (
-        <div className="GitProfile">Loading....</div>
+        <div className="GitProfile">Loading @{this.state.username}....</div>
       )
     } else if (!this.state.user) {
       return (
