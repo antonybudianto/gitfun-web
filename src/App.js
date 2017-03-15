@@ -13,16 +13,18 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="GitMain-header col-md-12">
+      <div className="App row">
+        <div className="App-header col-md-12">
           <h2>GitFun</h2>
         </div>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={GitMain}></Route>
-            <Route path="/profile" component={GitProfile}></Route>
-          </Switch>
-        </Router>
+        <div className="col-md-12">
+          <Router>
+            <Switch>
+              <Route exact path="/" component={GitMain}></Route>
+              <Route path="/profile/:username" component={GitProfile}></Route>
+            </Switch>
+          </Router>
+        </div>
       </div>
     );
   }
