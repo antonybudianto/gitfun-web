@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import GitProfileCard from './common/GitProfileCard';
+
 class App extends Component {
 
   constructor(props) {
@@ -81,12 +83,7 @@ class App extends Component {
                 }
                 {
                   this.state.users.map(user =>
-                    <div style={{marginBottom: '15px'}} className="col-xs-3" key={user.id}>
-                      <a href="#" className="thumbnail">
-                        <img alt={user.login} src={user['avatar_url']} />
-                      </a>
-                    {user.login}
-                    </div>
+                    <GitProfileCard user={user}></GitProfileCard>
                   )
                 }
               </div>
