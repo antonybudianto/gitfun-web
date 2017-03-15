@@ -101,9 +101,6 @@ class GitMain extends Component {
             )
           }
         </div>
-        <div className="col-md-12 GitMain-footer">
-          Made by @antonybudianto
-        </div>
       </div>
     );
   }

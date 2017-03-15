@@ -25,6 +25,9 @@ export default class App extends React.Component {
             </Switch>
           </Router>
         </div>
+        <div className="col-md-12 App-footer">
+          Made by @antonybudianto
+        </div>
       </div>
     );
   }

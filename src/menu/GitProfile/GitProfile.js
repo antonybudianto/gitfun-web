@@ -2,6 +2,7 @@ import React from 'react'
 
 import './GitProfile.css';
 import GitUserCard from '../../common/GitUserCard';
+import GitRepo from '../GitRepo/GitRepo';
 
 export default class GitProfile extends React.Component {
   constructor(props) {
@@ -28,24 +29,21 @@ export default class GitProfile extends React.Component {
         loading: false,
         user: result
       });
-      console.log(result);
     });
   }
 
   render() {
-    if (this.state.loading) {
-      return (
-        <div className="GitProfile">Loading @{this.state.username}....</div>
-      )
-    } else if (!this.state.user) {
-      return (
-        <div className="GitProfile">User not found.</div>
-      )
-    }
     return (
-      <div className="GitProfile col-md-4 col-md-offset-4">
-        <GitUserCard user={this.state.user}></GitUserCard>
+      <div className="GitProfile col-md-6 col-md-offset-3">
+        {
+          this.state.loading ? <div>Loading @{this.state.username} profile...</div> : (
+          !this.state.user ? <div>User not found</div> : <GitUserCard user={this.state.user}></GitUserCard>
+          )
+        }
+        <GitRepo username={this.state.username}></GitRepo>
+        <br/>
         <a href="/" className="btn btn-default">Back</a>
+        <br/>
       </div>
     )
   }
