@@ -37,14 +37,16 @@ export default class GitRepo extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="row">
         {
           this.state.repos.length === 0 ?
             <div>@{this.state.username} have zero repo</div> :
           this.state.repos
           .filter(repo => !repo.fork)
           .map(repo =>
-            <GitRepoCard key={repo.id} repo={repo}></GitRepoCard>
+            <div className="col-md-4">
+              <GitRepoCard key={repo.id} repo={repo}></GitRepoCard>
+            </div>
           )
         }
       </div>
