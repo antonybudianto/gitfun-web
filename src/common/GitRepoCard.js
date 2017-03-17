@@ -18,9 +18,9 @@ const GitRepoCard = ({repo}) =>
       <br/>
       <div>
         <span style={styles.repoSpan}>{repo.stargazers_count} <i className="fa fa-star"></i></span>
+        <span style={styles.repoSpan}>{repo.watchers} <i className="fa fa-eye"></i></span>
+        <span style={styles.repoSpan}>{repo.forks} <i className="fa fa-code-fork"></i></span>
         <span style={styles.repoSpan}>{repo.open_issues} issues</span>
-        <span style={styles.repoSpan}>{repo.watchers} watchers</span>
-        <span style={styles.repoSpan}>{repo.forks} forks</span>
       </div>
       <div>{repo.language}</div>
     </div>
