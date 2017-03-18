@@ -34,14 +34,12 @@ class GitMain extends Component {
     const { value } = this.state;
 
     const endpoint = `https://api.github.com/search/users?q=${value}`;
-    console.log(endpoint);
 
     fetch(endpoint, {
       method: 'GET'
     })
     .then(res => res.json())
     .then(result => {
-      console.log(result);
       this.setState({
         loading: false,
         users: result['items']
@@ -54,7 +52,6 @@ class GitMain extends Component {
   }
 
   navigateToProfile(data) {
-    console.log(data);
     const { login } = data;
     this.setState({
       redirectTo: `/profile/${login}`

@@ -68,8 +68,6 @@ class GitFollower extends React.Component {
 
   navigateToProfile(data) {
     const { login } = data;
-    // window.open('/profile/'+login);
-    console.log(this.props);
     this.props.history.push(`/profile/${login}`);
   }
 

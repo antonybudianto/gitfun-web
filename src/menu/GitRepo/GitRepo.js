@@ -59,7 +59,6 @@ export default class GitRepo extends React.Component {
     fetch(`https://api.github.com/users/${username}/repos?page=${this.state.page}`)
     .then(res => res.json())
     .then(result => {
-      console.log(result);
       this.setState((state) => {
         return {
           lastPage: result.length === 0,
