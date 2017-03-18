@@ -15,7 +15,9 @@ export default class App extends React.Component {
     return (
       <div className="App row">
         <div className="App-header col-md-12">
-          <h2>GitFun</h2>
+          <h2>
+            <a href="/" style={{color: 'white'}}>GitFun</a>
+          </h2>
         </div>
         <div className="col-md-12">
           <Router>
