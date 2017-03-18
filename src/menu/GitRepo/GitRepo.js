@@ -4,16 +4,16 @@ import './GitRepo.css';
 import GitRepoCard from '../../common/GitRepoCard';
 import GitStat from '../../common/GitStat';
 
-const ActionLabel = ({children, onClick}) =>
-  <span onClick={onClick} className="label label-info" style={{
+const ActionLabel = ({children, onClick, active}) =>
+  <span onClick={onClick} className={'label ' + (active ? 'label-success' : 'label-info')} style={{
     marginLeft: 2,
     marginRight: 2,
     padding: 5,
     cursor: 'pointer'
   }}>{children}</span>
 
-const LangLabel = ({label, count, onClick}) =>
-  <ActionLabel onClick={() => onClick({label, count})}>
+const LangLabel = ({label, count, onClick, active}) =>
+  <ActionLabel active={active} onClick={() => onClick({label, count})}>
     {label} &nbsp;<span className="badge">{count}</span>
   </ActionLabel>
 
@@ -138,11 +138,11 @@ export default class GitRepo extends React.Component {
           <div className="col-md-12">
             {
               langList.map(lang =>
-                <LangLabel onClick={this.handleFilterLang.bind(this)}
+                <LangLabel active={lang[0] === this.state.filterLang} onClick={this.handleFilterLang.bind(this)}
                   key={lang[0]} label={lang[0]} count={lang[1]} />)
             }
-            <ActionLabel onClick={() => this.filterLang(null)}
-              className="label label-default"><i className="fa fa-close"></i> Clear</ActionLabel>
+            <ActionLabel onClick={() => this.filterLang(null)}>
+              <i className="fa fa-close"></i> Clear</ActionLabel>
             <span style={{marginLeft: 5}}>
               <label>
                 <input onChange={this.toggleFork.bind(this)} checked={this.state.skipFork} type="checkbox"/> skip forks
