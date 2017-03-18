@@ -6,9 +6,10 @@ import GitStat from '../../common/GitStat';
 
 const ActionLabel = ({children, onClick, active}) =>
   <span onClick={onClick} className={'label ' + (active ? 'label-success' : 'label-info')} style={{
+    display: 'inline-block',
     marginLeft: 2,
     marginRight: 2,
-    padding: 5,
+    marginTop: 5,
     cursor: 'pointer'
   }}>{children}</span>
 
