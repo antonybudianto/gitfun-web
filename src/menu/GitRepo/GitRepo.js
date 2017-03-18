@@ -101,7 +101,7 @@ export default class GitRepo extends React.Component {
     }, {});
     const langList = Object.entries(languages);
 
-    if (!this.state.loading && repos.length === 0) {
+    if (!this.state.loading && this.state.repos.length === 0) {
       return (
         <div style={{marginTop: 10}}>@{this.state.username} didn't have any repo yet</div>
       );
@@ -129,7 +129,7 @@ export default class GitRepo extends React.Component {
             }
             <ActionLabel onClick={() => this.filterLang(null)}
               className="label label-default"><i className="fa fa-close"></i> Clear</ActionLabel>
-            <span className="checkbox">
+            <span style={{marginLeft: 5}}>
               <label>
                 <input onChange={this.toggleFork.bind(this)} checked={this.state.skipFork} type="checkbox"/> skip forks
               </label>
