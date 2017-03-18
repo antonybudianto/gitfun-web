@@ -94,7 +94,9 @@ class GitMain extends Component {
                 }
                 {
                   this.state.users.map(user =>
-                    <GitProfileCard onClick={this.navigateToProfile.bind(this)} key={user.id} user={user}></GitProfileCard>
+                    <div className="col-md-2 col-xs-6" key={user.id}>
+                      <GitProfileCard onClick={this.navigateToProfile.bind(this)} user={user}></GitProfileCard>
+                    </div>
                   )
                 }
               </div>
