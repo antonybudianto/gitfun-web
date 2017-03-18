@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import {
+  Link
+} from 'react-router-dom';
 
 import './GitProfile.css';
 import GitUserCard from '../../common/GitUserCard';
@@ -65,6 +68,12 @@ export default class GitProfile extends React.Component {
   render() {
     return (
       <div className="row">
+        <div>
+          <ol className="breadcrumb">
+            <li><Link to="/">Home</Link></li>
+            <li>Profile</li>
+          </ol>
+        </div>
         <div className="GitProfile col-md-8 col-md-offset-2">
           {
             this.state.loading ? <div>Loading @{this.state.username} profile...</div> : (
@@ -88,11 +97,6 @@ export default class GitProfile extends React.Component {
                   <GitFollower username={this.state.username}></GitFollower>
                 </div>
               </div>
-          </div>
-        </div>
-        <div>
-          <div style={{marginTop: 10}} className="col-md-8 col-md-offset-2">
-            <a href="/" className="btn btn-default">Back</a>
           </div>
         </div>
       </div>
