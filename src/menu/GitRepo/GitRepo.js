@@ -4,12 +4,18 @@ import './GitRepo.css';
 import GitRepoCard from '../../common/GitRepoCard';
 import GitStat from '../../common/GitStat';
 
-const LangLabel = ({label, count}) =>
-  <span className="label label-info" style={{
+const ActionLabel = ({children, onClick}) =>
+  <span onClick={onClick} className="label label-info" style={{
     marginLeft: 2,
     marginRight: 2,
-    padding: 5
-  }}>{label} &nbsp;<span className="badge">{count}</span></span>
+    padding: 5,
+    cursor: 'pointer'
+  }}>{children}</span>
+
+const LangLabel = ({label, count, onClick}) =>
+  <ActionLabel onClick={() => onClick({label, count})}>
+    {label} &nbsp;<span className="badge">{count}</span>
+  </ActionLabel>
 
 export default class GitRepo extends React.Component {
   constructor(props) {
@@ -20,7 +26,8 @@ export default class GitRepo extends React.Component {
     this.state = {
       loading: true,
       username: props.username,
-      repos: []
+      repos: [],
+      filterLang: null
     };
 
     this.fetchRepo(this.state.username);
@@ -35,6 +42,16 @@ export default class GitRepo extends React.Component {
         loading: false,
         repos: result
       });
+    });
+  }
+
+  handleFilterLang(language) {
+    this.filterLang(language.label);
+  }
+
+  filterLang(language) {
+    this.setState({
+      filterLang: language
     });
   }
 
@@ -79,14 +96,22 @@ export default class GitRepo extends React.Component {
         <div>
           {
             langList.map(lang =>
-              <LangLabel label={lang[0]} count={lang[1]} />
-            )
+              <LangLabel onClick={this.handleFilterLang.bind(this)}
+                key={lang[0]} label={lang[0]} count={lang[1]} />)
           }
+          <ActionLabel onClick={() => this.filterLang(null)}
+            className="label label-default"><i className="fa fa-close"></i> Clear</ActionLabel>
         </div>
         <br/>
         {
           repos
           .filter(repo => !repo.fork)
+          .filter(repo => {
+            if (this.state.filterLang) {
+              return repo.language === this.state.filterLang;
+            }
+            return repo;
+          })
           .map(repo =>
             <div className="col-md-4" key={repo.id}>
               <GitRepoCard key={repo.id} repo={repo}></GitRepoCard>
