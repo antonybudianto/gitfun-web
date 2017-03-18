@@ -1,17 +1,9 @@
 import React from 'react';
 
-const GitCountDisplay = ({count, label}) =>
-  <div style={{
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '8px'
-  }}>
-    <div>{count}</div>
-    <div>{label}</div>
-  </div>
+import GitStat from './GitStat';
 
 const GitUserCard = ({user}) =>
-  <div>
+  <div className="col-md-12">
     <img width="100" src={user['avatar_url']} alt={user['login']}/>
     <div>{user.login}</div>
     <br/>
@@ -19,10 +11,10 @@ const GitUserCard = ({user}) =>
       display: 'flex',
       justifyContent: 'center'
     }}>
-      <GitCountDisplay count={user.followers} label="followers" />
-      <GitCountDisplay count={user.following} label="following" />
-      <GitCountDisplay count={user.public_gists} label="gists" />
-      <GitCountDisplay count={user.public_repos} label="repos" />
+      <GitStat count={user.followers} label="followers" />
+      <GitStat count={user.following} label="following" />
+      <GitStat count={user.public_gists} label="gists" />
+      <GitStat count={user.public_repos} label="repos" />
     </div>
     <table className="table table-striped">
       <tbody>
