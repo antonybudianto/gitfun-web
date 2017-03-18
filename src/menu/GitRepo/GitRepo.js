@@ -21,28 +21,46 @@ export default class GitRepo extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
-
     this.state = {
       loading: true,
       username: props.username,
       repos: [],
-      filterLang: null
+      filterLang: null,
+      page: 1,
+      lastPage: false,
+      skipFork: true
     };
+  }
 
+  componentDidMount() {
     this.fetchRepo(this.state.username);
   }
 
   fetchRepo(username) {
-    fetch(`https://api.github.com/users/${username}/repos`)
+    this.setState({
+      loading: true
+    });
+
+    fetch(`https://api.github.com/users/${username}/repos?page=${this.state.page}`)
     .then(res => res.json())
     .then(result => {
       console.log(result);
-      this.setState({
-        loading: false,
-        repos: result
+      this.setState((state) => {
+        return {
+          lastPage: result.length === 0,
+          loading: false,
+          repos: [...state.repos, ...result]
+        }
       });
     });
+  }
+
+  loadMore() {
+    this.setState((state) => {
+      return {
+        page: state.page + (this.state.lastPage ? 0 : 1)
+      };
+    }, () => this.fetchRepo(this.state.username));
   }
 
   handleFilterLang(language) {
@@ -55,19 +73,21 @@ export default class GitRepo extends React.Component {
     });
   }
 
-  render() {
-    if (this.state.loading) {
-      return (
-        <div>Loading @{this.state.username} repos...</div>
-      );
-    } else if (this.state.repos.length === 0) {
-      return (
-        <div>@{this.state.username} have zero repo</div>
-      );
-    }
+  toggleFork() {
+    this.setState((state) => {
+      return {
+        skipFork: !state.skipFork
+      };
+    });
+  }
 
-    const repos = this.state.repos
-      .filter(repo => !repo.fork);
+  render() {
+    let repos;
+    if (this.state.skipFork) {
+      repos = this.state.repos.filter(repo => !repo.fork);
+    } else {
+      repos = this.state.repos;
+    }
     const totalStars = repos.reduce((acc, cur) => acc + cur['stargazers_count'], 0);
     const totalForks = repos.reduce((acc, cur) => acc + cur['forks'], 0);
     const totalOpenIssues = repos.reduce((acc, cur) => acc + cur['open_issues'], 0);
@@ -81,6 +101,12 @@ export default class GitRepo extends React.Component {
     }, {});
     const langList = Object.entries(languages);
 
+    if (!this.state.loading && repos.length === 0) {
+      return (
+        <div style={{marginTop: 10}}>@{this.state.username} didn't have any repo yet</div>
+      );
+    }
+
     return (
       <div>
         <h3>Repo summary</h3>
@@ -88,10 +114,11 @@ export default class GitRepo extends React.Component {
           display: 'flex',
           justifyContent: 'center'
         }}>
-          <GitStat count={totalStars} label="stars"></GitStat>
-          <GitStat count={totalForks} label="forks"></GitStat>
-          <GitStat count={totalOpenIssues} label="issues"></GitStat>
-          <GitStat count={langList.length} label="languages"></GitStat>
+          <GitStat count={repos.length} label="repos" />
+          <GitStat count={totalStars} label="stars" />
+          <GitStat count={totalForks} label="forks" />
+          <GitStat count={totalOpenIssues} label="issues" />
+          <GitStat count={langList.length} label="languages" />
         </div>
         <div className="row">
           <div className="col-md-12">
@@ -102,13 +129,17 @@ export default class GitRepo extends React.Component {
             }
             <ActionLabel onClick={() => this.filterLang(null)}
               className="label label-default"><i className="fa fa-close"></i> Clear</ActionLabel>
+            <span className="checkbox">
+              <label>
+                <input onChange={this.toggleFork.bind(this)} checked={this.state.skipFork} type="checkbox"/> skip forks
+              </label>
+            </span>
           </div>
         </div>
         <br/>
         <div>
           {
             repos
-            .filter(repo => !repo.fork)
             .filter(repo => {
               if (this.state.filterLang) {
                 return repo.language === this.state.filterLang;
@@ -121,6 +152,12 @@ export default class GitRepo extends React.Component {
               </div>
             )
           }
+        </div>
+        <div className="col-md-12">
+          <button disabled={this.state.loading}
+            onClick={this.loadMore.bind(this)} className="btn btn-primary">
+            { this.state.loading ? 'Loading...' : 'Load more' }
+          </button>
         </div>
       </div>
     )

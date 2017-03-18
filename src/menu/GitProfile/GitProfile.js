@@ -72,7 +72,7 @@ export default class GitProfile extends React.Component {
           </div>
         </div>
         <div>
-          <div className="col-md-8 col-md-offset-2">
+          <div style={{marginTop: 10}} className="col-md-8 col-md-offset-2">
             <a href="/" className="btn btn-default">Back</a>
           </div>
         </div>

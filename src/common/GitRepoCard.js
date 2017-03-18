@@ -9,7 +9,7 @@ const styles = {
 const GitRepoCard = ({repo}) =>
   <div className="panel panel-info">
     <div className="panel-heading">
-      <h3 className="panel-title"><a href={repo.html_url}>{repo.name}</a></h3>
+      <h3 className="panel-title"><a href={repo.html_url}>{repo.name} {repo.fork ? <i className="fa fa-code-fork"></i> : null}</a></h3>
     </div>
     <div className="panel-body">
       <div>
