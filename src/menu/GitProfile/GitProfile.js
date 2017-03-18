@@ -3,6 +3,7 @@ import React from 'react'
 import './GitProfile.css';
 import GitUserCard from '../../common/GitUserCard';
 import GitRepo from '../GitRepo/GitRepo';
+import GitFollower from '../GitFollower/GitFollower';
 
 export default class GitProfile extends React.Component {
   constructor(props) {
@@ -13,6 +14,9 @@ export default class GitProfile extends React.Component {
       user: null,
       tab: 'repo'
     };
+  }
+
+  componentDidMount() {
     this.fetchProfile(this.state.username);
   }
 
@@ -66,7 +70,7 @@ export default class GitProfile extends React.Component {
                   <GitRepo username={this.state.username}></GitRepo>
                 </div>
                 <div role="tabpanel" className={'tab-pane '+this.isTabActive('followers')} id="followers">
-                  Followers
+                  <GitFollower username={this.state.username}></GitFollower>
                 </div>
               </div>
           </div>
