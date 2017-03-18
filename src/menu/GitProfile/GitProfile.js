@@ -10,7 +10,8 @@ export default class GitProfile extends React.Component {
     this.state = {
       username: props.match.params.username,
       loading: true,
-      user: null
+      user: null,
+      tab: 'repo'
     };
     this.fetchProfile(this.state.username);
   }
@@ -32,11 +33,21 @@ export default class GitProfile extends React.Component {
     });
   }
 
+  switchTab(tabName) {
+    this.setState({
+      tab: tabName
+    });
+  }
+
+  isTabActive(tabName) {
+    return this.state.tab === tabName ? 'active' : '';
+  }
+
   render() {
     return (
       <div className="row">
         <div className="row">
-          <div className="GitProfile col-md-6 col-md-offset-3">
+          <div className="GitProfile col-md-8 col-md-offset-2">
             {
               this.state.loading ? <div>Loading @{this.state.username} profile...</div> : (
               !this.state.user ? <div>User not found</div> : <GitUserCard user={this.state.user}></GitUserCard>
@@ -44,13 +55,27 @@ export default class GitProfile extends React.Component {
             }
           </div>
         </div>
-
         <div className="row">
           <div className="col-md-8 col-md-offset-2">
-            <GitRepo username={this.state.username}></GitRepo>
-            <br/>
+              <ul className="nav nav-tabs" role="tablist">
+                <li role="presentation" className={this.isTabActive('repo')}>
+                  <a onClick={this.switchTab.bind(this, 'repo')} href="#" aria-controls="repo" role="tab" data-toggle="tab"><i className="fa fa-book"></i> Repositories</a></li>
+                <li role="presentation" className={this.isTabActive('followers')}>
+                  <a onClick={this.switchTab.bind(this, 'followers')} href="#" aria-controls="followers" role="tab" data-toggle="tab"><i className="fa fa-users"></i> Followers</a></li>
+              </ul>
+              <div className="tab-content">
+                <div role="tabpanel" className={'tab-pane '+this.isTabActive('repo')} id="repo">
+                  <GitRepo username={this.state.username}></GitRepo>
+                </div>
+                <div role="tabpanel" className={'tab-pane '+this.isTabActive('followers')} id="followers">
+                  Followers
+                </div>
+              </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-8 col-md-offset-2">
             <a href="/" className="btn btn-default">Back</a>
-            <br/>
           </div>
         </div>
       </div>
