@@ -80,7 +80,6 @@ class GitFollower extends React.Component {
 
     return (
       <div>
-        <h3>GitFollower</h3>
         <div className="row">
           <div className="col-md-12" style={{marginTop: 20}}>
             {
