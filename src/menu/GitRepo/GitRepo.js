@@ -80,10 +80,9 @@ export default class GitRepo extends React.Component {
       return acc;
     }, {});
     const langList = Object.entries(languages);
-    const totalLanguages = langList.reduce((acc, cur) => acc + cur[1], 0);
 
     return (
-      <div className="row">
+      <div>
         <h3>Repo summary</h3>
         <div style={{
           display: 'flex',
@@ -92,33 +91,37 @@ export default class GitRepo extends React.Component {
           <GitStat count={totalStars} label="stars"></GitStat>
           <GitStat count={totalForks} label="forks"></GitStat>
           <GitStat count={totalOpenIssues} label="issues"></GitStat>
-          <GitStat count={totalLanguages} label="languages"></GitStat>
+          <GitStat count={langList.length} label="languages"></GitStat>
         </div>
-        <div>
-          {
-            langList.map(lang =>
-              <LangLabel onClick={this.handleFilterLang.bind(this)}
-                key={lang[0]} label={lang[0]} count={lang[1]} />)
-          }
-          <ActionLabel onClick={() => this.filterLang(null)}
-            className="label label-default"><i className="fa fa-close"></i> Clear</ActionLabel>
+        <div className="row">
+          <div className="col-md-12">
+            {
+              langList.map(lang =>
+                <LangLabel onClick={this.handleFilterLang.bind(this)}
+                  key={lang[0]} label={lang[0]} count={lang[1]} />)
+            }
+            <ActionLabel onClick={() => this.filterLang(null)}
+              className="label label-default"><i className="fa fa-close"></i> Clear</ActionLabel>
+          </div>
         </div>
         <br/>
-        {
-          repos
-          .filter(repo => !repo.fork)
-          .filter(repo => {
-            if (this.state.filterLang) {
-              return repo.language === this.state.filterLang;
-            }
-            return repo;
-          })
-          .map(repo =>
-            <div className="col-md-4" key={repo.id}>
-              <GitRepoCard key={repo.id} repo={repo}></GitRepoCard>
-            </div>
-          )
-        }
+        <div>
+          {
+            repos
+            .filter(repo => !repo.fork)
+            .filter(repo => {
+              if (this.state.filterLang) {
+                return repo.language === this.state.filterLang;
+              }
+              return repo;
+            })
+            .map(repo =>
+              <div className="col-md-4" key={repo.id}>
+                <GitRepoCard key={repo.id} repo={repo}></GitRepoCard>
+              </div>
+            )
+          }
+        </div>
       </div>
     )
   }

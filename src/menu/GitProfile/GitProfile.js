@@ -46,16 +46,14 @@ export default class GitProfile extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="row">
-          <div className="GitProfile col-md-8 col-md-offset-2">
-            {
-              this.state.loading ? <div>Loading @{this.state.username} profile...</div> : (
-              !this.state.user ? <div>User not found</div> : <GitUserCard user={this.state.user}></GitUserCard>
-              )
-            }
-          </div>
+        <div className="GitProfile col-md-8 col-md-offset-2">
+          {
+            this.state.loading ? <div>Loading @{this.state.username} profile...</div> : (
+            !this.state.user ? <div>User not found</div> : <GitUserCard user={this.state.user}></GitUserCard>
+            )
+          }
         </div>
-        <div className="row">
+        <div>
           <div className="col-md-8 col-md-offset-2">
               <ul className="nav nav-tabs" role="tablist">
                 <li role="presentation" className={this.isTabActive('repo')}>
@@ -73,7 +71,7 @@ export default class GitProfile extends React.Component {
               </div>
           </div>
         </div>
-        <div className="row">
+        <div>
           <div className="col-md-8 col-md-offset-2">
             <a href="/" className="btn btn-default">Back</a>
           </div>

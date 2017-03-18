@@ -13,3 +13,7 @@
   padding: 10px;
   color: gray;
 }
+
+.no-padding {
+  padding: 0
+}
