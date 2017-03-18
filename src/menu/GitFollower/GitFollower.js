@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {
-  Redirect
+  Redirect,
+  withRouter
 } from 'react-router-dom'
 
 import GitProfileCard from '../../common/GitProfileCard';
@@ -18,8 +19,21 @@ class GitFollower extends React.Component {
       lastPage: false,
       redirectTo: null
     };
+  }
 
-    console.log(this.props);
+  componentWillReceiveProps(props) {
+    if (this.state.username === props.username) {
+      return;
+    }
+
+    this.setState({
+      username: props.username,
+      followers: [],
+      page: 1,
+      lastPage: false
+    }, () => {
+      this.fetchFollowers(this.state.username);
+    });
   }
 
   componentDidMount() {
@@ -54,7 +68,9 @@ class GitFollower extends React.Component {
 
   navigateToProfile(data) {
     const { login } = data;
-    window.open('/profile/'+login);
+    // window.open('/profile/'+login);
+    console.log(this.props);
+    this.props.history.push(`/profile/${login}`);
   }
 
   render() {
@@ -91,4 +107,5 @@ class GitFollower extends React.Component {
   }
 }
 
-export default GitFollower;
+const GitFollowerWithRouter = withRouter(GitFollower);
+export default GitFollowerWithRouter;

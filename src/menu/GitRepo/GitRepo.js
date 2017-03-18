@@ -22,14 +22,29 @@ export default class GitRepo extends React.Component {
     super(props);
 
     this.state = {
-      loading: true,
       username: props.username,
+      loading: true,
       repos: [],
       filterLang: null,
       page: 1,
       lastPage: false,
       skipFork: true
     };
+  }
+
+  componentWillReceiveProps(props) {
+    if (this.state.username === props.username) {
+      return;
+    }
+
+    this.setState({
+      username: props.username,
+      repos: [],
+      filterLang: null,
+      page: 1,
+      lastPage: false,
+      skipFork: true
+    }, () => this.fetchRepo(this.state.username));
   }
 
   componentDidMount() {

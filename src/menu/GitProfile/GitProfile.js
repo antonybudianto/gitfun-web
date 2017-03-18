@@ -15,12 +15,27 @@ export default class GitProfile extends React.Component {
       tab: 'repo'
     };
   }
+  componentWillReceiveProps(props) {
+    if (this.state.username === props.match.params.username) {
+      return;
+    }
+
+    this.setState({
+      username: props.match.params.username,
+      user: null,
+      tab: 'repo'
+    }, () => this.fetchProfile(this.state.username));
+  }
 
   componentDidMount() {
     this.fetchProfile(this.state.username);
   }
 
   fetchProfile(username) {
+    this.setState({
+      loading: true
+    });
+
     fetch(`https://api.github.com/users/${username}`)
     .then(res => res.json())
     .then(result => {
