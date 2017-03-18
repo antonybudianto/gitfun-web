@@ -72,6 +72,7 @@ export default class GitRepo extends React.Component {
     const totalForks = repos.reduce((acc, cur) => acc + cur['forks'], 0);
     const totalOpenIssues = repos.reduce((acc, cur) => acc + cur['open_issues'], 0);
     const languages = repos.reduce((acc, cur) => {
+      if (!cur['language']) return acc;
       if (!acc[cur['language']]) {
         acc[cur['language']] = 0;
       }
