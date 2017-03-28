@@ -13,7 +13,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="App row">
+      <div className="App">
         <div className="App-header col-md-12">
           <h2>
             <a href="/" style={{color: 'white'}}>GitFun</a>
