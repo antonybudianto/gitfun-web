@@ -8,6 +8,7 @@ import {
 import './App.css';
 import GitMain from './menu/GitMain/GitMain';
 import GitProfile from './menu/GitProfile/GitProfile';
+import NotFoundPage from './error/NotFoundPage/NotFoundPage';
 
 export default class App extends React.Component {
 
@@ -24,6 +25,7 @@ export default class App extends React.Component {
             <Switch>
               <Route exact path="/" component={GitMain}></Route>
               <Route path="/profile/:username" component={GitProfile}></Route>
+              <Route path="*" component={NotFoundPage}></Route>
             </Switch>
           </Router>
         </div>
