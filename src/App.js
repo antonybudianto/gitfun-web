@@ -16,24 +16,28 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <div className="App-header col-md-12">
-            <div>
-              <h2>
-                <a href="/" style={{color: 'white'}}>GitFun</a>
-              </h2>
+            <div className="container">
+              <div className="col-md-6 no-padding">
+                <h2>
+                  <a href="/" style={{color: 'white'}}>GitFun</a>
+                </h2>
+              </div>
+              <div className="col-md-6 no-padding" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <a title="Fork me on GitHub" style={{
+                  fontSize: '50px',
+                  color: 'white'
+                }} href="https://github.com/antonybudianto/gitfun-web">
+                  <i className="fa fa-github"></i>
+                </a>
+                <a title="Get it on Google Play" href='https://play.google.com/store/apps/details?id=com.antonybudianto.gitfun'>
+                  <img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+              </div>
             </div>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center'
-            }}>
-              <a title="Fork me on GitHub" style={{
-                fontSize: '50px',
-                color: 'white'
-              }} href="https://github.com/antonybudianto/gitfun-web">
-                <i className="fa fa-github"></i>
-              </a>
-              <a title="Get it on Google Play" href='https://play.google.com/store/apps/details?id=com.antonybudianto.gitfun'>
-                <img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
-            </div>
+
         </div>
         <div className="col-md-12">
           <Router>
