@@ -72,7 +72,7 @@ class GitMain extends Component {
             <div className="input-group">
               <input value={this.state.value} onChange={this.handleTextChange.bind(this)} type="text" className="form-control" placeholder="Search GitHub username" />
               <div className="input-group-btn">
-                <button type="submit" className="btn btn-primary">Search</button>
+                <button disabled={!this.state.value} type="submit" className="btn btn-primary">Search</button>
               </div>
             </div>
             </form>
@@ -81,7 +81,7 @@ class GitMain extends Component {
         <div className="GitMain-intro col-md-6 col-md-offset-3">
           {
             this.state.loading ? (
-              <div>Loading....</div>
+              <div><i className="fa fa-spin fa-spinner"></i> Loading....</div>
             ) : (
               <div className="row">
                 {
@@ -91,7 +91,7 @@ class GitMain extends Component {
                 }
                 {
                   this.state.users.map(user =>
-                    <div className="col-md-2 col-xs-6" key={user.id}>
+                    <div className="col-md-2 col-xs-3" key={user.id}>
                       <GitProfileCard onClick={this.navigateToProfile.bind(this)} user={user}></GitProfileCard>
                     </div>
                   )

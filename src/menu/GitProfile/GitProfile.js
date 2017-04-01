@@ -76,7 +76,7 @@ export default class GitProfile extends React.Component {
         </div>
         <div className="GitProfile col-md-8 col-md-offset-2">
           {
-            this.state.loading ? <div>Loading @{this.state.username} profile...</div> : (
+            this.state.loading ? <div><i className="fa fa-spin fa-spinner"></i> Loading @{this.state.username} profile...</div> : (
             !this.state.user ? <div>User not found</div> : <GitUserCard user={this.state.user}></GitUserCard>
             )
           }
