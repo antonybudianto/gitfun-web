@@ -10,6 +10,11 @@
   color: white;
 }
 
+.App-header h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .App-footer {
   margin-top: 30px;
   padding: 10px;
