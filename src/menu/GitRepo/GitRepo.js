@@ -25,6 +25,7 @@ export default class GitRepo extends React.Component {
     this.state = {
       username: props.username,
       loading: true,
+      repoQuery: '',
       repos: [],
       filterLang: null,
       page: 1,
@@ -96,6 +97,12 @@ export default class GitRepo extends React.Component {
     });
   }
 
+  handleSearchRepo(event) {
+    this.setState({
+      repoQuery: event.target.value
+    });
+  }
+
   render() {
     let repos;
     if (this.state.skipFork) {
@@ -123,8 +130,12 @@ export default class GitRepo extends React.Component {
     }
 
     return (
-      <div>
-        <h3>Repo summary</h3>
+      <div style={{paddingTop: 10}}>
+        <div className="row">
+          <div className="col-md-6 col-md-offset-3">
+            <input value={this.state.repoQuery} onChange={this.handleSearchRepo.bind(this)} type="text" placeholder="Search repo..." className="form-control"/>
+          </div>
+        </div>
         <div style={{
           display: 'flex',
           justifyContent: 'center'
@@ -152,7 +163,12 @@ export default class GitRepo extends React.Component {
           </div>
         </div>
         <br/>
-        <div>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexWrap: 'wrap'
+        }}>
           {
             repos
             .filter(repo => {
@@ -161,10 +177,14 @@ export default class GitRepo extends React.Component {
               }
               return repo;
             })
+            .filter(repo => {
+              if (this.state.repoQuery) {
+                return repo.name.search(this.state.repoQuery) > -1
+              }
+              return repo;
+            })
             .map(repo =>
-              <div className="col-md-4" key={repo.id}>
                 <GitRepoCard key={repo.id} repo={repo}></GitRepoCard>
-              </div>
             )
           }
         </div>
