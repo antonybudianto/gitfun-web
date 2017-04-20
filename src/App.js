@@ -23,7 +23,7 @@ export default class App extends React.Component {
                   justifyContent: 'center',
                   alignItems: 'center'
                 }}>
-                  <img className="img-rounded" width="40" height="40" src="favicon.ico" alt="GitFun Icon"/>
+                  <img className="img-rounded" width="40" height="40" src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="GitFun Icon"/>
                   <h2>
                     <a href="/" style={{color: 'white', marginLeft: 10}}>GitFun</a>
                   </h2>
