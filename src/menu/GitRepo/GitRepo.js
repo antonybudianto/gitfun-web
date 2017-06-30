@@ -147,7 +147,7 @@ export default class GitRepo extends React.Component {
           <GitStat count={langList.length} label="languages" />
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 text-center">
             {
               langList.map(lang =>
                 <LangLabel active={lang[0] === this.state.filterLang} onClick={this.handleFilterLang.bind(this)}
@@ -188,10 +188,10 @@ export default class GitRepo extends React.Component {
             )
           }
         </div>
-        <div className="col-md-12">
+        <div className="col-md-12 text-center">
           <button disabled={this.state.loading}
             onClick={this.loadMore.bind(this)} className="btn btn-primary">
-            { this.state.loading ? 'Loading...' : 'Load more' }
+            { this.state.loading ? <i className="fa fa-spin fa-circle-o-notch"></i> : 'Load more' }
           </button>
         </div>
       </div>

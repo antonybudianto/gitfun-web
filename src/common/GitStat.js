@@ -4,6 +4,7 @@ const GitStat = ({count, label}) =>
   <div style={{
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     margin: '10px'
   }}>
     <div><strong>{count}</strong></div>

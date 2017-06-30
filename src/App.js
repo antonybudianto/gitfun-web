@@ -55,7 +55,7 @@ export default class App extends React.Component {
             </Switch>
           </Router>
         </div>
-        <div className="col-md-12 App-footer">
+        <div className="col-md-12 App-footer text-center">
           &copy; 2017. <a href="https://antonybudianto.com">Antony Budianto</a>
         </div>
       </div>
