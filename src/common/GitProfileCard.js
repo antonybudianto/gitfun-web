@@ -6,8 +6,9 @@ const GitProfileCard = ({ user, onClick }) =>
       <img alt={user.login} src={user['avatar_url']} />
     </a>
     <div style={{
-      fontSize: 14
-    }}>{user.login}</div>
+      fontSize: 14,
+      textAlign: 'center'
+    }}><a href={user['html_url']}>{user.login}</a></div>
   </div>
 
 export default GitProfileCard;
