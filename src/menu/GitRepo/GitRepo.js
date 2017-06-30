@@ -26,7 +26,7 @@ export default class GitRepo extends React.Component {
       username: props.username,
       loading: true,
       repoQuery: '',
-      repoType: 'source',
+      repoType: 'sources',
       repos: [],
       filterLang: null,
       page: 1,
