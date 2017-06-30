@@ -6,7 +6,7 @@ const GitUserCard = ({user}) =>
   <div className="col-md-12">
     <div className="col-md-4">
       <img width="100" src={user['avatar_url']} alt={user['login']}/>
-      <div>{user.login}</div>
+      <div><a href={user['html_url']}>@{user.login}</a></div>
       <br/>
       <div style={{
         display: 'flex',
@@ -40,10 +40,6 @@ const GitUserCard = ({user}) =>
           <tr>
             <th>Location</th>
             <td>{user.location}</td>
-          </tr>
-          <tr>
-            <th>Link to GitHub</th>
-            <td><a href={user['html_url']}>@{user.login}</a></td>
           </tr>
         </tbody>
       </table>
