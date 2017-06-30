@@ -154,7 +154,8 @@ export default class GitRepo extends React.Component {
                   key={lang[0]} label={lang[0]} count={lang[1]} />)
             }
             <ActionLabel onClick={() => this.filterLang(null)}>
-              <i className="fa fa-close"></i> Clear</ActionLabel>
+              <span className="badge"><i className="fa fa-close"></i></span> &nbsp; Clear
+            </ActionLabel>
             <span style={{marginLeft: 5}}>
               <label>
                 <input onChange={this.toggleFork.bind(this)} checked={this.state.skipFork} type="checkbox"/> skip forks
