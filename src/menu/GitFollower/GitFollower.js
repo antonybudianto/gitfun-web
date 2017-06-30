@@ -92,10 +92,10 @@ class GitFollower extends React.Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 text-center">
             <button disabled={this.state.loading}
               onClick={this.loadMore.bind(this)} className="btn btn-primary">
-              { this.state.loading ? 'Loading...' : 'Load more' }
+              { this.state.loading ? <i className="fa fa-spin fa-circle-o-notch"></i> : 'Load more' }
             </button>
           </div>
         </div>
