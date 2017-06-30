@@ -24,7 +24,7 @@ const GitRepoCard = ({repo}) =>
         {repo.description || <div style={{color: 'gray', fontStyle: 'italic'}}>No description</div>}
         </div>
       </div>
-      <div className="col-md-4">
+      <div className="col-md-4 text-right">
         <div>
           <span style={styles.repoSpan}>{repo.stargazers_count} <i className="fa fa-star"></i></span>
           <span style={styles.repoSpan}>{repo.forks} <i className="fa fa-code-fork"></i></span>
