@@ -26,11 +26,11 @@ export default class GitRepo extends React.Component {
       username: props.username,
       loading: true,
       repoQuery: '',
+      repoType: 'source',
       repos: [],
       filterLang: null,
       page: 1,
-      lastPage: false,
-      skipFork: true
+      lastPage: false
     };
   }
 
@@ -44,8 +44,7 @@ export default class GitRepo extends React.Component {
       repos: [],
       filterLang: null,
       page: 1,
-      lastPage: false,
-      skipFork: true
+      lastPage: false
     }, () => this.fetchRepo(this.state.username));
   }
 
@@ -89,27 +88,28 @@ export default class GitRepo extends React.Component {
     });
   }
 
-  toggleFork() {
-    this.setState((state) => {
-      return {
-        skipFork: !state.skipFork
-      };
-    });
-  }
-
   handleSearchRepo(event) {
     this.setState({
       repoQuery: event.target.value
     });
   }
 
+  handleChangeRepoType(event) {
+    this.setState({
+      repoType: event.target.value
+    });
+  }
+
   render() {
     let repos;
-    if (this.state.skipFork) {
+    if (this.state.repoType === 'sources') {
       repos = this.state.repos.filter(repo => !repo.fork);
+    } else if (this.state.repoType === 'forks') {
+      repos = this.state.repos.filter(repo => repo.fork);
     } else {
       repos = this.state.repos;
     }
+
     const totalStars = repos.reduce((acc, cur) => acc + cur['stargazers_count'], 0);
     const totalForks = repos.reduce((acc, cur) => acc + cur['forks'], 0);
     const totalOpenIssues = repos.reduce((acc, cur) => acc + cur['open_issues'], 0);
@@ -157,9 +157,11 @@ export default class GitRepo extends React.Component {
               <span className="badge"><i className="fa fa-close"></i></span> &nbsp; Clear
             </ActionLabel>
             <span style={{marginLeft: 5}}>
-              <label>
-                <input onChange={this.toggleFork.bind(this)} checked={this.state.skipFork} type="checkbox"/> skip forks
-              </label>
+              <select value={this.state.repoType} onChange={this.handleChangeRepoType.bind(this)}>
+                <option value="sources">Sources</option>
+                <option value="forks">Forks</option>
+                <option value="all">All</option>
+              </select>
             </span>
           </div>
         </div>
