@@ -12,26 +12,28 @@ const GitRepoCard = ({repo}) =>
     marginBottom: 0
   }}>
     <div className="panel-body">
-      <div className="col-md-8">
-        <div>
-          <strong>
-            <a href={repo.html_url}>{repo.name} {repo.fork ? <i className="fa fa-code-fork"></i> : null}
-            </a>
-          </strong>
+      <div className="row">
+        <div className="col-md-8">
+          <div>
+            <strong>
+              <a href={repo.html_url}>{repo.name} {repo.fork ? <i className="fa fa-code-fork"></i> : null}
+              </a>
+            </strong>
+          </div>
+          <div style={{
+            marginTop: '5px'
+          }}>
+          {repo.description || <div style={{color: 'gray', fontStyle: 'italic'}}>No description</div>}
+          </div>
         </div>
-        <div style={{
-          marginTop: '5px'
-        }}>
-        {repo.description || <div style={{color: 'gray', fontStyle: 'italic'}}>No description</div>}
+        <div className="col-md-4 text-right">
+          <div>
+            <span style={styles.repoSpan}>{repo.stargazers_count} <i className="fa fa-star"></i></span>
+            <span style={styles.repoSpan}>{repo.forks} <i className="fa fa-code-fork"></i></span>
+            <span style={styles.repoSpan}>{repo.open_issues} issues</span>
+          </div>
+          <div>{repo.language}</div>
         </div>
-      </div>
-      <div className="col-md-4 text-right">
-        <div>
-          <span style={styles.repoSpan}>{repo.stargazers_count} <i className="fa fa-star"></i></span>
-          <span style={styles.repoSpan}>{repo.forks} <i className="fa fa-code-fork"></i></span>
-          <span style={styles.repoSpan}>{repo.open_issues} issues</span>
-        </div>
-        <div>{repo.language}</div>
       </div>
     </div>
   </div>

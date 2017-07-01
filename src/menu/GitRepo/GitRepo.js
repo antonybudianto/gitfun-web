@@ -28,7 +28,7 @@ export default class GitRepo extends React.Component {
       repoQuery: '',
       repoType: 'sources',
       repos: [],
-      filterLang: null,
+      filterLang: [],
       page: 1,
       lastPage: false
     };
@@ -42,7 +42,7 @@ export default class GitRepo extends React.Component {
     this.setState({
       username: props.username,
       repos: [],
-      filterLang: null,
+      filterLang: [],
       page: 1,
       lastPage: false
     }, () => this.fetchRepo(this.state.username));
@@ -79,13 +79,11 @@ export default class GitRepo extends React.Component {
   }
 
   handleFilterLang(language) {
-    this.filterLang(language.label);
-  }
-
-  filterLang(language) {
-    this.setState({
-      filterLang: language
-    });
+    const { label } = language;
+    this.setState(state => ({
+      filterLang: state.filterLang.indexOf(label) === -1 ? [...state.filterLang, label] :
+      state.filterLang.filter(lang => lang !== label)
+    }));
   }
 
   handleSearchRepo(event) {
@@ -150,12 +148,9 @@ export default class GitRepo extends React.Component {
           <div className="col-md-12 text-center">
             {
               langList.map(lang =>
-                <LangLabel active={lang[0] === this.state.filterLang} onClick={this.handleFilterLang.bind(this)}
+                <LangLabel active={this.state.filterLang.indexOf(lang[0]) !== -1} onClick={this.handleFilterLang.bind(this)}
                   key={lang[0]} label={lang[0]} count={lang[1]} />)
             }
-            <ActionLabel onClick={() => this.filterLang(null)}>
-              <span className="badge"><i className="fa fa-close"></i></span> &nbsp; Clear
-            </ActionLabel>
             <span style={{marginLeft: 5}}>
               <select value={this.state.repoType} onChange={this.handleChangeRepoType.bind(this)}>
                 <option value="sources">Sources</option>
@@ -175,16 +170,16 @@ export default class GitRepo extends React.Component {
           {
             repos
             .filter(repo => {
-              if (this.state.filterLang) {
-                return repo.language === this.state.filterLang;
+              if (this.state.filterLang.length > 0) {
+                return this.state.filterLang.indexOf(repo.language) !== -1;
               }
-              return repo;
+              return true;
             })
             .filter(repo => {
               if (this.state.repoQuery) {
                 return repo.name.search(this.state.repoQuery) > -1
               }
-              return repo;
+              return true;
             })
             .map(repo =>
                 <GitRepoCard key={repo.id} repo={repo}></GitRepoCard>
