@@ -192,6 +192,7 @@ export default class GitRepo extends React.Component {
           }
         </div>
         <div className="col-md-12 text-center">
+          <br/>
           <button disabled={this.state.loading}
             onClick={this.loadMore.bind(this)} className="btn btn-primary">
             { this.state.loading ? <i className="fa fa-spin fa-circle-o-notch"></i> : 'Load more' }

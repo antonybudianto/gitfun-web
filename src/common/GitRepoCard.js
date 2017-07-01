@@ -8,7 +8,8 @@ const styles = {
 
 const GitRepoCard = ({repo}) =>
   <div className="panel panel-default" style={{
-    width: '90%'
+    width: '90%',
+    marginBottom: 0
   }}>
     <div className="panel-body">
       <div className="col-md-8">
