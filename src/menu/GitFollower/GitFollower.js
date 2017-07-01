@@ -78,6 +78,12 @@ class GitFollower extends React.Component {
       );
     }
 
+    if (!this.state.loading && this.state.followers.length === 0) {
+      return (
+        <div style={{marginTop: 10}}><strong>@{this.state.username}</strong> didn't have any follower yet</div>
+      );
+    }
+
     return (
       <div>
         <div className="row">

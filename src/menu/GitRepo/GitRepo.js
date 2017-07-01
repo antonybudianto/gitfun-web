@@ -123,7 +123,7 @@ export default class GitRepo extends React.Component {
 
     if (!this.state.loading && this.state.repos.length === 0) {
       return (
-        <div style={{marginTop: 10}}>@{this.state.username} didn't have any repo yet</div>
+        <div style={{marginTop: 10}}><strong>@{this.state.username}</strong> didn't have any repo yet</div>
       );
     }
 
