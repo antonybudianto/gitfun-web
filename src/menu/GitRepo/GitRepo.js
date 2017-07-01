@@ -4,8 +4,8 @@ import './GitRepo.css';
 import GitRepoCard from '../../common/GitRepoCard';
 import GitStat from '../../common/GitStat';
 
-const ActionLabel = ({children, onClick, active}) =>
-  <span onClick={onClick} className={'label ' + (active ? 'label-success' : 'label-info')} style={{
+const ActionLabel = ({children, onClick, active, title}) =>
+  <span title={title} onClick={onClick} className={'label ' + (active ? 'label-success' : 'label-info')} style={{
     display: 'inline-block',
     marginLeft: 2,
     marginRight: 2,
@@ -130,8 +130,15 @@ export default class GitRepo extends React.Component {
     return (
       <div style={{paddingTop: 10}}>
         <div className="row">
-          <div className="col-md-6 col-md-offset-3">
+          <div className="col-md-4 col-md-offset-3">
             <input value={this.state.repoQuery} onChange={this.handleSearchRepo.bind(this)} type="text" placeholder="Search repo..." className="form-control"/>
+          </div>
+          <div className="col-md-2">
+              <select className="form-control" value={this.state.repoType} onChange={this.handleChangeRepoType.bind(this)}>
+                <option value="sources">Sources</option>
+                <option value="forks">Forks</option>
+                <option value="all">All</option>
+              </select>
           </div>
         </div>
         <div style={{
@@ -151,13 +158,13 @@ export default class GitRepo extends React.Component {
                 <LangLabel active={this.state.filterLang.indexOf(lang[0]) !== -1} onClick={this.handleFilterLang.bind(this)}
                   key={lang[0]} label={lang[0]} count={lang[1]} />)
             }
-            <span style={{marginLeft: 5}}>
-              <select value={this.state.repoType} onChange={this.handleChangeRepoType.bind(this)}>
-                <option value="sources">Sources</option>
-                <option value="forks">Forks</option>
-                <option value="all">All</option>
-              </select>
-            </span>
+            <ActionLabel title="Clear filter" onClick={() => {
+                this.setState({
+                  filterLang: []
+                });
+              }}>
+              <span className="badge"><i className="fa fa-times"></i></span>
+            </ActionLabel>
           </div>
         </div>
         <br/>
