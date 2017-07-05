@@ -17,19 +17,17 @@ export default class App extends React.Component {
       <div className="App">
         <div className="App-header col-md-12">
             <div className="container">
-              <div className="col-md-6 no-padding">
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}>
-                  <img className="img-rounded" width="40" height="40" src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="GitFun Icon"/>
-                  <h2>
-                    <a href="/" style={{color: 'white', marginLeft: 10}}>GitFun</a>
-                  </h2>
-                </div>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <img className="img-rounded" width="40" height="40" src={`${process.env.PUBLIC_URL}/favicon.ico`} alt="GitFun Icon"/>
+                <h2>
+                  <a href="/" style={{color: 'white', marginLeft: 10}}>GitFun</a>
+                </h2>
               </div>
-              <div className="col-md-6 no-padding" style={{
+              <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'

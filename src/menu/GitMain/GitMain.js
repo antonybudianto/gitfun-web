@@ -72,7 +72,7 @@ class GitMain extends Component {
             <div className="input-group">
               <input value={this.state.value} onChange={this.handleTextChange.bind(this)} type="text" className="form-control" placeholder="Search GitHub username" />
               <div className="input-group-btn">
-                <button disabled={!this.state.value} type="submit" className="btn btn-primary">Search</button>
+                <button disabled={!this.state.value} type="submit" className="btn btn-primary"><i className="fa fa-search"></i> Search</button>
               </div>
             </div>
             </form>

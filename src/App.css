@@ -1,9 +1,13 @@
 .App-header {
-  display: flex;
-  justify-content: space-between;
   background-color: black;
   padding: 10px;
   color: white;
+}
+
+.App-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .App-header h2 {
