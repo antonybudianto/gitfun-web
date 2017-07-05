@@ -3,7 +3,7 @@ import React from 'react';
 const GitProfileCard = ({ user, onClick }) =>
   <div style={{marginBottom: '15px'}}>
     <a onClick={() => onClick(user)} href="#" className="thumbnail">
-      <img alt={user.login} src={user['avatar_url']} />
+      <img style={{height: '120px'}} alt={user.login} src={user['avatar_url']} />
     </a>
     <div style={{
       fontSize: 14,

@@ -88,6 +88,7 @@ class GitFollower extends React.Component {
       <div>
         <div className="row">
           <div className="col-md-12" style={{marginTop: 20}}>
+            <div className="row">
             {
               this.state.followers.map(follower =>
                 <div className="col-md-2 col-xs-3" key={follower.id}>
@@ -95,6 +96,7 @@ class GitFollower extends React.Component {
                 </div>
               )
             }
+            </div>
           </div>
         </div>
         <div className="row">
